@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue写类</title>
+  <style>
+   .red{
+     color: red;
+   }
+
+   .border {
+     border: 2px yellowgreen dotted;
+   }
+
+   .pink {
+     background-color: pink;
+   }
+
+   .big {
+     font-size: 30px;
+   }
+  </style>
+  
+</head>
+<body>
+  <div id="app">
+    <div :class = '{"red":isRed,"border":isBorder}'>对象表示法</div>
+    <button @click = 'xxx'>border</button>
+    <hr>
+    <div :class = '[bgColor,fSize]'>数组表示法</div>
+    <hr>
+    <div :class = '[{"red":isRed,},bgColor]'>混合表示法</div>
+    <hr>
+    <div :style = 'blue'>style表示法</div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script>
+    var app = new Vue({
+      el:'#app',
+      data:{
+        isRed:true,
+        isBorder:false,
+        bgColor:'pink',
+        fSize:'big',
+        blue:{
+          color:'blue',
+          fontSize:'24px'
+        }
+      },
+      methods: {
+        xxx:function(){
+          this.isBorder = !this.isBorder
+        }
+      }
+    })
+  </script>
+</body>
+</html>

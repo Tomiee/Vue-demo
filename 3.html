@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>计算属性</title>
+</head>
+<body>
+  <div id="app">
+    <div v-text='fullName'></div>
+    <hr>
+    <div> {{msg}} </div>
+    <div>下面实现翻转</div>
+    <div> methods:{{rev()}} </div>
+    <div> computed:{{rev1}} </div>
+    <hr>
+    <div> {{msg}} </div>
+    <button @click = 'change'>Methods和缓存区别</button>
+    <div> methods:{{time()}} </div>
+    <div> computed:{{time1}} </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script>
+    var app = new Vue({
+      el:'#app',
+      data:{
+        firstName:'Jack',
+        lastName:'rolin',
+        msg:'123,456,789'
+      },
+      methods: {
+        change:function(){
+          this.lastName = '注意看下面的时间'
+        },
+        rev:function(){
+          return this.msg.split(',').reverse().join(',')
+        },
+        time:function(){
+          return new Date()
+        }
+      },
+      computed: {
+        fullName:function(){
+          return this.firstName +' '+ this.lastName
+        },
+        rev1:function(){
+          return this.msg.split(',').reverse().join(',')
+        },
+        time1:function(){
+          return new Date()
+        }
+      },
+    })
+  </script>
+</body>
+</html>

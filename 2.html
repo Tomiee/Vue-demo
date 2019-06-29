@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+   .red {
+     color: red;
+   }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+
+<body>
+  <div class="app">
+    <div>{{msg}}</div>
+    <button @click='hit'>点着玩</button>
+    <hr>
+    <div :class = 'className'> {{date }} </div>
+    <div> {{date | formDate}} </div>
+    <hr>
+    <div v-text='xxx'></div>
+    <div v-html='yyy'></div>
+  </div>
+
+  <script>
+    var plusDate = function (date) {
+      return date<10?'0'+date:date
+    }
+
+    var app = new Vue({
+      el: '.app',
+      data: {
+        msg: 'el里最好是用id选择,我这里用类选择器只是试一下是否可行',
+        date: new Date(),
+        className:'red',
+        xxx: '这都是啥呀 v-text',
+        yyy: '<div style="color:brown;font-size:30px;background-color:cyan" >我是vue的v-html加的</div>'
+      },
+      methods: {
+        hit: function () {
+          alert('打你一顿信不信')
+        },
+        sx: function () {
+          this.timer = setInterval(() => {
+            this.date = new Date()
+          }, 1000)
+        }
+      },
+      filters: {
+        formDate: function (value) {
+          let date = new Date(value)
+          let year = plusDate(date.getFullYear())
+          let month = plusDate(date.getMonth() + 1)
+          let day = plusDate(date.getDate())
+          let hour = plusDate(date.getHours())
+          let min = plusDate(date.getMinutes())
+          let sec = plusDate(date.getSeconds())
+
+          return `${year}-${month}-${day} ${hour}:${min}:${sec}`
+        }
+      },
+      mounted() {
+        this.sx()
+      },
+      destroyed() {
+        clearInterval(this.timer)
+      },
+    })
+  </script>
+</body>
+
+</html>
