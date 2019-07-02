@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>自定义事件</title>
+</head>
+
+<body>
+  <div id="app">
+    银行卡余额: {{total}}
+    <son-component @change='cal'>  </son-component>
+
+
+  </div>
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
+  <script>
+    Vue.component('son-component', {
+      template: ' <div>\
+      <button @click="add">+1000</button>\
+      <button @click="reduce">-1000</button>\
+      </div>',
+      data() {
+        return {
+          count: 2000
+        }
+      },
+      methods: {
+        add: function () {
+          this.count = this.count + 1000
+          this.$emit('change',this.count)
+        },
+        reduce: function () {
+          this.count = this.count - 1000
+          this.$emit('change',this.count)
+        }
+      },
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data:{
+        total:2000
+      },
+      methods:{
+        cal:function(value){
+          this.total = value
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

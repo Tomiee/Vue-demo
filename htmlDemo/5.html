@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>指令</title>
+</head>
+
+<!-- 
+    1,v-if,v-else-if,v-else,v-for
+    2,v-cloak,v-show
+    3,修饰符stop,once,prevent,self
+    4,数组的常规常见操作,和两个特殊的属性(长度,通过下标改变)
+   -->
+<style>
+  [v-cloak] {
+    display: none;
+  }
+</style>
+
+<body>
+
+  <div id="app">
+    <!-- 避免用户看到插值表达式,跟display一起使用 -->
+    <div v-cloak> {{msg}} </div>
+    <hr>
+    <!-- 如果是false的话,还是会渲染出来,只不过display:none -->
+    <div v-show='ok'> {{msg}} </div>
+    <!-- v-if,如果值为false,那么直接不渲染,不会出现 该元素-->
+    <div v-if='error'> {{msg}} </div>
+    <hr>
+    <div v-if='number<9'>这个一位数</div>
+    <div v-else-if='number>9'>这是个两位数</div>
+    <div v-else>这是个三位数</div>
+    <div style="color:red">重点:1,必须跟着尾巴写 2,Vue 在渲染元素时 ，出于效率考虑，会尽可能地复用已有的元素而非重新渲染， 因此会出现乌龙只会渲染变化的元素，也就是说，input元素被复用了(解决方法:加key属性,唯一,提供key值可决定的是否复用该元素)</div>
+    <hr>
+    <!-- v-for的用法 -->
+    <ul>
+      数组中v-for的用法:(参数可以只有一个,但是顺序不能改变)
+      <li v-for='(item,index) in fruit'> {{index+1}}: {{item.name}} </li>
+    </ul>
+
+    <ul>
+      对象中v-for的用法:(参数可以只有你一个,但是顺序不能改变)
+      <li v-for='(value,key,index) in girl'> {{index}}-{{key}}:{{value}} </li>
+    </ul>
+
+    <hr>
+    <a
+      href="https://cn.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">数组和对象的改变的重新渲染(数组的通过下标不能改变内容和不能改变长度均得以解决</a>
+
+    <hr>
+    <a href="https://cn.vuejs.org/v2/guide/events.html#%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6">事件修饰符</a>
+    <a href="https://cn.vuejs.org/v2/guide/events.html#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6">按键修饰符</a>
+    <hr>
+
+    <input type="text" v-model= 'md'> <span> {{md}}  </span>
+
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        msg: 'v-if和v-show的区别',
+        ok: true,
+        error: false,
+        number: 26,
+        fruit: [{
+            name: 'apple'
+          },
+          {
+            name: 'banana'
+          },
+          {
+            name: 'orange'
+          }
+        ],
+        girl: {
+          name: 'xiaopipi',
+          gender: 'female',
+          age: 18
+        },
+        md:'你想写点啥'
+      }
+    })
+  </script>
+</body>
+
+</html>

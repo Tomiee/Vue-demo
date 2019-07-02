@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <child-component1 :msg='"这里是父组件的传值"'></child-component1>
+
+    <input type="text" v-model='width'>
+    <child-component2 :width='width'></child-component2>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
+  <script>
+    Vue.component('child-component1', {
+      props: ['msg'],
+      template: '<div>父组件的传值: {{xxx}} </div>',
+      data() {
+        return {
+          xxx: this.msg
+        }
+      },
+    })
+
+    Vue.component('child-component2', {
+      props: ['width'],
+      template: '<div :style="style"></div>',
+      data() {
+        return {}
+      },
+      computed: {
+        style: function () {
+          //直接就是style;
+          return {
+            width: this.width + 'px',
+            // background-color:'red',
+            background: 'red',
+            height: '30px'
+          }
+        }
+      }
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        width: '0',
+      },
+
+    })
+  </script>
+</body>
+
+</html>
