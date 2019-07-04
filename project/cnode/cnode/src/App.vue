@@ -1,23 +1,29 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <!-- <img src="./assets/logo.png">
+    <router-view/> -->
+    <Header></Header>
+    <div class="main">
+     <router-view name="main"></router-view>
+    </div>
   </div>
 </template>
 
 <script>
+import Header from './components/Header'
+import postList from './components/postList'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    Header,postList
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+ * {
+   margin: 0;
+   padding: 0;
+ }
 </style>
