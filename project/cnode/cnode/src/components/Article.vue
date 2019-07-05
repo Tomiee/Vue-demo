@@ -18,23 +18,28 @@
       </div>
 
       <!-- 回复 -->
-      <div class="reply">
+      <div id="reply">
         <div class="topbar">回复</div>
         <ul>
-          <li v-for="(reply,index) in article.replies" :key="reply.id">
-            <img :src="reply.author.avatar_url" alt>
+          <li v-for="(reply,index) in article.replies" :key="reply.id" class="replySec">
+            <router-link :to="{name:'user_info',params:{name:reply.author.loginname}}">
+              <img :src="reply.author.avatar_url" alt>
+            </router-link>
             <div>
               <!-- 回复头部 -->
               <div>
-                <span>{{reply.author.loginname}}</span>
+                <router-link :to="{name:'user_info',params:{name:reply.author.name}}">
+                  <span>{{reply.author.loginname}}</span>
+                </router-link>
+
                 <span>{{index+1}}楼</span>
                 <span>{{reply.create_at | formatDate }}</span>
                 <span>
-                  <span ></span>
+                  <span></span>
                 </span>
               </div>
               <!-- 回复内容 -->
-              <p v-html='reply.content'></p>
+              <p v-html="reply.content"></p>
             </div>
           </li>
         </ul>

@@ -98,7 +98,7 @@ export default {
 ul {
   list-style: none;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1360px;
   margin: 0 auto;
 }
 

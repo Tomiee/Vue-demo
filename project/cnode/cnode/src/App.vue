@@ -4,6 +4,7 @@
     <router-view/> -->
     <Header></Header>
     <div class="main">
+     <router-view name="SlideBar"></router-view>
      <router-view name="main"></router-view>
     </div>
   </div>
@@ -25,5 +26,10 @@ export default {
  * {
    margin: 0;
    padding: 0;
+ }
+
+ .main {
+    width: 80%;
+    margin:0 auto;
  }
 </style>
